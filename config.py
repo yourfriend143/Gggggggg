@@ -1,32 +1,41 @@
-# devgagan
-# Note if you are trying to deploy on vps then directly fill values in ("")
+import os
 
-from os import getenv
+def get_int(name, default):
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return int(default)
+    try:
+        return int(value)
+    except ValueError:
+        return int(default)
 
-# VPS --- FILL COOKIES 🍪 in """ ... """ 
+def get_str(name, default=""):
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return default
+    return value
 
-INST_COOKIES = """
-# wtite up here insta cookies
-"""
+def get_list_of_ints(name, default):
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        value = default
+    try:
+        return list(map(int, value.split()))
+    except ValueError:
+        return list(map(int, default.split()))
 
-YTUB_COOKIES = """
-# write here yt cookies
-"""
-img_url = getenv("img_url","https://graph.org/file/bcf1fbe3708277ccb31e3-4d7967c1dbee1cce20.jpg")
-Credit = getenv("Credit","GUMNAAM")
-c_url = getenv("c_url","https://t.me/Bhardwaj1434")
-API_ID = int(getenv("API_ID", "23283708"))
-API_HASH = getenv("API_HASH", "7805011fb84729023531f0fa3f000bec")
-BOT_TOKEN = getenv("BOT_TOKEN", "8529663322:AAH9bshdN4fLKJLgTHLI3lFPyaNlskm-9-U")
-OWNER_ID = list(map(int, getenv("OWNER_ID", "6481888008").split()))
-MONGO_DB = getenv("MONGO_DB", "mongodb+srv://rj5706603:O95nvJYxapyDHfkw@cluster0.fzmckei.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-LOG_GROUP = getenv("LOG_GROUP", "-1002363362847")
-CHANNEL_ID = int(getenv("CHANNEL_ID", "-1002363362847"))
-FREEMIUM_LIMIT = int(getenv("FREEMIUM_LIMIT", "0"))
-PREMIUM_LIMIT = int(getenv("PREMIUM_LIMIT", "10000"))
-WEBSITE_URL = getenv("WEBSITE_URL", "seturl")
-AD_API = getenv("AD_API", "bd3e6eda2cae3645c953ce93c38725bc3c5ebc93")
-STRING = getenv("STRING", None)
-YT_COOKIES = getenv("YT_COOKIES", YTUB_COOKIES)
-DEFAULT_SESSION = getenv("DEFAUL_SESSION", None)  # added old method of invite link joining
-INSTA_COOKIES = getenv("INSTA_COOKIES", INST_COOKIES)
+API_ID = get_int("API_ID", 23283708)
+API_HASH = get_str("API_HASH")
+BOT_TOKEN = get_str("BOT_TOKEN")
+
+CHANNEL_ID = get_int("CHANNEL_ID", -1002363362847)
+OWNER_ID = get_list_of_ints("OWNER_ID", "6481888008")
+
+FREEMIUM_LIMIT = get_int("FREEMIUM_LIMIT", 0)
+PREMIUM_LIMIT = get_int("PREMIUM_LIMIT", 10000)
+
+if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN is missing!")
+
+if not API_HASH:
+    raise ValueError("API_HASH is missing!")
