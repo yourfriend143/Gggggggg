@@ -25,8 +25,8 @@ def get_list_of_ints(name, default):
         return list(map(int, default.split()))
 
 API_ID = get_int("API_ID", 23283708)
-API_HASH = get_str("API_HASH")
-BOT_TOKEN = get_str("BOT_TOKEN")
+API_HASH = get_str("API_HASH", 7805011fb84729023531f0fa3f000bec)
+BOT_TOKEN = get_str("BOT_TOKEN", 8529663322:AAH9bshdN4fLKJLgTHLI3lFPyaNlskm-9-U)
 
 CHANNEL_ID = get_int("CHANNEL_ID", -1002363362847)
 OWNER_ID = get_list_of_ints("OWNER_ID", "6481888008")
